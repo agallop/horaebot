@@ -21,10 +21,16 @@ public class HoraebotMain {
     // Enable debugging output.
     bot.setVerbose(true);
 
-    //Connect to the IRC
-    bot.connect("irc.chat.twitch.tv", 6667, args[1]);
-
-    for(int i = 2; i < args.length; i++)
-      bot.joinChannel("#" + args[i]);
+    try {
+      bot.connect("irc.chat.twitch.tv", 6667, args[1]);
+    } catch (NickAlreadyInUseException e) {
+      System.err.println("Nickname is currently in use");
+    } catch (IrcException e) {
+      System.err.println("Server did not accept connection");
+      e.printStackTrace();
+    } finally {
+      for(int i = 2; i < args.length; i++)
+        bot.joinChannel("#" + args[i]);
+    }
   }
 }
