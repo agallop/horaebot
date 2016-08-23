@@ -30,7 +30,12 @@ public class HoraebotMain {
       e.printStackTrace();
     } finally {
       for(int i = 2; i < args.length; i++){
-        bot.joinChannel("#" + args[i]);
+        String channel = "#" + args[i];
+        bot.joinChannel(channel);
+        try{
+          Thread.sleep(2000);
+          bot.sendMessage(channel, "*Yawn* Hello " + args[i] + "'s chat!");
+        } catch(Exception ex){}
       }
     }
   }
