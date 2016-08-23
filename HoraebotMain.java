@@ -29,8 +29,9 @@ public class HoraebotMain {
       System.err.println("Server did not accept connection");
       e.printStackTrace();
     } finally {
-      for(int i = 2; i < args.length; i++)
+      for(int i = 2; i < args.length; i++){
         bot.joinChannel("#" + args[i]);
+      }
     }
   }
 }
